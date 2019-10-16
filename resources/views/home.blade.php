@@ -1,11 +1,20 @@
 @extends('adminlte::page')
 
-@section('title', 'AdminLTE')
+@section('title', 'Live Alerts')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Live Alerts</h1>
 @stop
 
 @section('content')
-    <p>You are logged in!</p>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-default">
+
+                {{-- Init Google Maps --}}
+                <div class="box-body js-google-maps"></div>
+
+            </div>
+        </div>
+    </div>
 @stop

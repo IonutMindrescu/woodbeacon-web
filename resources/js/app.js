@@ -5,6 +5,8 @@
  */
 
 require('./bootstrap');
+import('./events/sound-detected.js');
+import('./elements/googlemaps.js');
 
 window.Vue = require('vue');
 
