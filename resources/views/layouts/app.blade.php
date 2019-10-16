@@ -21,8 +21,8 @@
         forceTLS: true
     });
 
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function(data) {
+    var channel = pusher.subscribe('alerts-channel');
+    channel.bind('sound-detected', function(data) {
         alert(JSON.stringify(data));
     });
     </script>

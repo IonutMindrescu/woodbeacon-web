@@ -20,11 +20,11 @@ class Alert implements ShouldBroadcast
 
   public function broadcastOn()
   {
-      return ['my-channel'];
+      return ['alerts-channel'];
   }
 
   public function broadcastAs()
   {
-      return 'my-event';
+      return 'sound-detected';
   }
 }
