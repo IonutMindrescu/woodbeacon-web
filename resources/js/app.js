@@ -5,30 +5,11 @@
  */
 
 require('./bootstrap');
-import('./events/sound-detected.js');
-import('./elements/googlemaps.js');
 
-window.Vue = require('vue');
+// load WB - elements
+require('./elements/WB.js');
+require('./elements/WB.GoogleMaps.js');
+require('./elements/WB.Utils.js');
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-const app = new Vue({
-    el: '#app',
-});
+// load WB - events
+require('./elements/events/WB.Events.Alert.js');

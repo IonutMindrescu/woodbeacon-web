@@ -2,6 +2,7 @@
 * Google Maps - Load the map from the Alerts page
 *
 * */
+
 (function() {
     const jsPackLoader = {
         init: function () {

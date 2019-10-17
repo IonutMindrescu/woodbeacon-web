@@ -18,20 +18,12 @@
             });
 
             let channel = pusher.subscribe('alerts-channel');
+
             channel.bind('sound-detected', function (data) {
                 alert(JSON.stringify(data));
-                this.playAlert('/public/sounds/alert.mp3');
+                WB.Utils.playAlert('/public/sounds/alert.mp3');
             });
         },
-        playAlert: function (soundURL) {
-            let audioPlay = {};
-            audioPlay['source'] = new Audio();
-            audioPlay['source'].src = soundURL;
-
-            audioPlay['source'].addEventListener('load', function () {
-                audioPlay['source'].play();
-            });
-        }
     };
 
     $(document).ready(() => {
