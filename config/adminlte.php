@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'collapse_sidebar' => false,
+    'collapse_sidebar' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -300,7 +300,7 @@ return [
         ],
         [
             'name' => 'Pace',
-            'active' => true,
+            'active' => false,
             'files' => [
                 [
                     'type' => 'css',

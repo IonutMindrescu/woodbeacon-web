@@ -2,25 +2,84 @@
 * Google Maps - Load the map from the Alerts page
 *
 * */
+WB = window.WB || {};
+
+WB.GoogleMaps = WB.GoogleMaps || {};
 
 (function() {
-    const jsPackLoader = {
+    WB.GoogleMaps = {
         init: function () {
-            this.googleMaps();
+            let mapMarkers = {};
+            this.gMap = this.googleMaps();
+            this.initListeners();
+            //WB.GoogleMaps.attachMarker();
+        },
+
+        initListeners: function() {
+            // card alert
+            $('.card-alert').on('click', (e) => {
+                let element = $(e.currentTarget).data('json');
+                WB.GoogleMaps.panToLocation(element.lat, element.lng);
+            });
+
+            //
+        },
+
+        panToLocation: function(lat, lng) {
+            //this.gMap.panTo(new google.maps.LatLng(lat, lng));
+            this.gMap.setZoom(20);
+            WB.GoogleMaps.attachMarker(lat, lng);
+            this.gMap.setCenter(new google.maps.LatLng(lat, lng));
+        },
+
+        attachMarker: function(lat, lng) {
+
+            if (this.mapMarkers.length !== 0) {
+                this.mapMarkers.setMap(null);
+            }
+
+            this.mapMarkers = new google.maps.Marker({
+                    position: new google.maps.LatLng(lat, lng),
+                    map: this.gMap}),
+                infowindow = new google.maps.InfoWindow({
+                    content: 'Activitate neobisnuita detectata in parcela: 128'
+                });
+            infowindow.open(this.gMap, gMarker);
         },
 
         googleMaps: function() {
-            if ($('.js-google-maps').length) {
+            if ($('#js-google-maps').length) {
                 let marker = {},
                     infowindow = {},
                     candidates = {},
-                    $map = $('.js-google-maps');
+                    $map = $('#js-google-maps');
 
                 let gMap = new google.maps.Map($map[0], {
-                    center: {
-                        lat: 45.937387, lng: 24.851998,
-                    },
-                    zoom: 7
+                    center: {lat: 47.639944, lng: 26.259346},
+                    zoom: 19
+                });
+
+                let gmapLayer = new google.maps.KmlLayer({
+                    url: 'http://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1Rxn5g-mTdlG3m--s7DeSAzUm2wrT4tWm&lid=bunKi_v7Wtc',
+                    suppressInfoWindows: true,
+                    preserveViewport: true,
+                    clickable: true,
+                    map: gMap
+                });
+
+                /*gmapLayer.addListener('click', (event) => {
+                    let marker = new google.maps.Marker({
+                        position: event.latLng,
+                        map: gMap
+                    });
+                    console.log(marker);
+
+                    gMap.panTo(event.latLng);
+                    console.log(event);
+                });*/
+
+                gMap.addListener('click', (event) => {
+                    Swal.fire( "Latitude: "+event.latLng.lat()+" "+", longitude: "+event.latLng.lng() );
                 });
 
 /*                $.each(json_housings, function(index, item){
@@ -53,12 +112,13 @@
                         infowindow[index].open(map, marker[index]);
                     });
                 });*/
+                return gMap;
             }
         },
     };
 
     $(document).ready(() => {
-        jsPackLoader.init();
+        WB.GoogleMaps.init();
     });
 })($);
 

@@ -4,7 +4,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+// import sweet alert 2
+import Swal from "sweetalert2";
 
 // load WB - elements
 require('./elements/WB.js');

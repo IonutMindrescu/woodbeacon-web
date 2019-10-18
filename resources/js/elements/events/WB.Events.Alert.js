@@ -13,15 +13,15 @@
             Pusher.logToConsole = true;
 
             let pusher = new Pusher('406a05c4895ed986ff7a', {
-                cluster: 'eu',
-                forceTLS: true
-            });
+                    cluster: 'eu',
+                    forceTLS: true
+                }),
+                channel = pusher.subscribe('alerts-channel');
 
-            let channel = pusher.subscribe('alerts-channel');
+            channel.bind('sound-detected', (data) => {
+                Swal.fire('Alerta!', 'A fost detectata o activitate neobisnuita! ' + data, 'error');
 
-            channel.bind('sound-detected', function (data) {
-                alert(JSON.stringify(data));
-                WB.Utils.playAlert('/public/sounds/alert.mp3');
+                WB.Utils.playAlert('/sounds/alert.mp3');
             });
         },
     };
