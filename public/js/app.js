@@ -3215,7 +3215,8 @@ var WB = WB || {};
       }),
           channel = pusher.subscribe('alerts-channel');
       channel.bind('sound-detected', function (data) {
-        Swal.fire('Alerta!', 'A fost detectata o activitate neobisnuita! ' + data, 'error');
+        console.log(data.message);
+        Swal.fire('Alerta!', 'A fost detectata o activitate neobisnuita! ' + data.message.action, 'error');
         WB.Utils.playAlert('/sounds/alert.mp3');
       });
     }
@@ -3245,8 +3246,8 @@ var WB = WB || {};
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/woodbeacon-web/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/html/woodbeacon-web/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /usr/local/var/www/woodbeacon-web/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /usr/local/var/www/woodbeacon-web/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

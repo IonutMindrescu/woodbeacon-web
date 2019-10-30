@@ -16,3 +16,9 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// < api routes for the wood-beacon devices >
+Route::prefix('device')->name('device.')->group(function () {
+    Route::post('alert', 'DeviceController@alert')->name('alert');
+    Route::post('status', 'DeviceController@status')->name('status');
+});

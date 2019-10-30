@@ -19,7 +19,8 @@
                 channel = pusher.subscribe('alerts-channel');
 
             channel.bind('sound-detected', (data) => {
-                Swal.fire('Alerta!', 'A fost detectata o activitate neobisnuita! ' + data, 'error');
+                console.log(data.message);
+                Swal.fire('Alerta!', 'A fost detectata o activitate neobisnuita! ' + data.message.action, 'error');
 
                 WB.Utils.playAlert('/sounds/alert.mp3');
             });
