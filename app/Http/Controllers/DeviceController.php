@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\Alert;
+use App\Events\{Alert, BatteryAlert};
 use Illuminate\Http\Request;
 
 class DeviceController extends Controller
@@ -20,8 +20,8 @@ class DeviceController extends Controller
                     event(new Alert($requestData->payload_fields->message));
                     break;
 
-                case 'device-status':
-                    //
+                case 'device-battery':
+                    event(new BatteryAlert($requestData->payload_fields->battery));
                     break;
 
                 default:

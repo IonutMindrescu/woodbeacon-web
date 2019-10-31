@@ -24,6 +24,10 @@
 
                 WB.Utils.playAlert('/sounds/alert.mp3');
             });
+
+            channel.bind('battery-status', (data) => {
+                console.log(data.message);
+            });
         },
     };
 

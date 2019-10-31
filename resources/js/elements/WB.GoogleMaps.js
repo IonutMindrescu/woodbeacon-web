@@ -10,7 +10,7 @@ WB.GoogleMaps = WB.GoogleMaps || {};
     WB.GoogleMaps = {
         init: function () {
             let mapMarkers = {};
-            this.gMap = this.googleMaps();
+            //this.gMap = this.googleMaps();
             this.initListeners();
             //WB.GoogleMaps.attachMarker();
         },

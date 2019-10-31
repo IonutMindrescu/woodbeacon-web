@@ -3053,8 +3053,8 @@ WB.GoogleMaps = WB.GoogleMaps || {};
 (function () {
   WB.GoogleMaps = {
     init: function init() {
-      var mapMarkers = {};
-      this.gMap = this.googleMaps();
+      var mapMarkers = {}; //this.gMap = this.googleMaps();
+
       this.initListeners(); //WB.GoogleMaps.attachMarker();
     },
     initListeners: function initListeners() {
@@ -3218,6 +3218,9 @@ var WB = WB || {};
         console.log(data.message);
         Swal.fire('Alerta!', 'A fost detectata o activitate neobisnuita! ' + data.message.action, 'error');
         WB.Utils.playAlert('/sounds/alert.mp3');
+      });
+      channel.bind('battery-status', function (data) {
+        console.log(data.message);
       });
     }
   };
