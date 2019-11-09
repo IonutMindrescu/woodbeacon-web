@@ -25,6 +25,6 @@ class Alert implements ShouldBroadcast
 
   public function broadcastAs()
   {
-      return 'sound-detected';
+      return 'device-alert';
   }
 }

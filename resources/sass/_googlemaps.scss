@@ -9,7 +9,7 @@
     border-radius: 0;
 }
 
-.card{
+.card {
     border-radius: 4px;
     background: #fff;
     box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
@@ -17,29 +17,26 @@
     padding: 14px 80px 18px 36px;
     cursor: pointer;
 
-    h3{
+    h3 {
         font-weight: 600;
     }
-    img{
+    img {
         position: absolute;
         top: 20px;
         right: 15px;
         max-height: 120px;
     }
-    @media(max-width: 990px){
+    @media(max-width: 990px) {
         margin: 20px;
     }
 }
-.card:not(:first-child){
-    margin-top: 25px;
-}
 
-.card:hover{
+.card:hover {
     transform: scale(1.05);
     box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
 }
 
-.card-alert{
+.card-alert {
     background-image: url('/images/alert.png');
     background-repeat: no-repeat;
     background-position: 113% 50%;

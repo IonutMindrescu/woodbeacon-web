@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\{Alert, BatteryAlert};
+use App\Events\{Alert, DeviceAlert};
 use Illuminate\Http\Request;
 
 class DeviceController extends Controller
@@ -12,16 +12,19 @@ class DeviceController extends Controller
         $requestData = json_decode($request->getContent());
 
         // check if data is sent by our TTN device
-        if(isset($requestData->app_id) && $requestData->app_id == 'wood-beacon') {
+        if (isset($requestData->app_id) && $requestData->app_id == 'wood-beacon') {
+            // define payload fields
+            $oPayloadFields = $requestData->payload_fields->message;
+
+            // broadcast the event with Pusher
+            event(new Alert($oPayloadFields));
 
             // check the sent action
-            switch ($requestData->payload_fields->message->action) {
+            switch ($oPayloadFields->action) {
                 case 'sound-detected':
-                    event(new Alert($requestData->payload_fields->message));
                     break;
 
-                case 'device-battery':
-                    event(new BatteryAlert($requestData->payload_fields->battery));
+                case 'device-alert':
                     break;
 
                 default:

@@ -24,6 +24,14 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "sweetalert2": "^8.18.4"
+        "@google/maps": "^1.0.2",
+        "fs": "0.0.1-security",
+        "google-maps": "^3.3.0",
+        "net": "^1.0.2",
+        "npm-watch": "^0.6.0",
+        "pusher": "^3.0.0",
+        "pusher-js": "^5.0.2",
+        "sweetalert2": "^8.18.4",
+        "tls": "0.0.1"
     }
 }

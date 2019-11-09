@@ -38,7 +38,9 @@
                         <div class="col-sm-4 border-right">
                             <div class="description-block">
                                 <h5 class="description-header">STATUS</h5>
-                                <span class="description-text"><span class="device-status bg-green-gradient"></span></span>
+                                <span class="description-text">
+                                    <div class="status offline"></div>
+                                </span>
                             </div>
                             <!-- /.description-block -->
                         </div>

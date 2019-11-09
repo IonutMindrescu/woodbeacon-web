@@ -21,7 +21,6 @@ WB.GoogleMaps = WB.GoogleMaps || {};
                 let element = $(e.currentTarget).data('json');
                 WB.GoogleMaps.panToLocation(element.lat, element.lng);
             });
-
             //
         },
 

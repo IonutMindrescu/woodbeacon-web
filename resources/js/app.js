@@ -6,6 +6,8 @@
 
 // import sweet alert 2
 import Swal from "sweetalert2";
+// import Pusher
+import Pusher from "pusher-js";
 
 // load WB - elements
 require('./elements/WB.js');

@@ -18,15 +18,21 @@
                 }),
                 channel = pusher.subscribe('alerts-channel');
 
-            channel.bind('sound-detected', (data) => {
-                console.log(data.message);
-                Swal.fire('Alerta!', 'A fost detectata o activitate neobisnuita! ' + data.message.action, 'error');
+            channel.bind('device-alert', (data) => {
+                let aData = data.message;
+                console.log(aData);
 
-                WB.Utils.playAlert('/sounds/alert.mp3');
-            });
-
-            channel.bind('battery-status', (data) => {
-                console.log(data.message);
+                switch (aData.action) {
+                    case 'sound-detected':
+                        Swal.fire('Alerta!', `A fost detectata o activitate neobisnuita! ${aData.action}`, 'error');
+                        WB.Utils.playAlert('/sounds/alert.mp3');
+                        break;
+                    case 'device-update':
+                        $('.js-battery-level').html(`${aData.battery}%`);
+                        break;
+                    default:
+                        break;
+                }
             });
         },
     };
