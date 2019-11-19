@@ -11,21 +11,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
-    <script>
-    // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = true;
-
-    var pusher = new Pusher('406a05c4895ed986ff7a', {
-        cluster: 'eu',
-        forceTLS: true
-    });
-
-    var channel = pusher.subscribe('alerts-channel');
-    channel.bind('sound-detected', function(data) {
-        alert(JSON.stringify(data));
-    });
-    </script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

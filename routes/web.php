@@ -23,12 +23,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/broadcast', 'HomeController@broadcast')->name('broadcast');
 
-
-Route::get('/test', function () {
-    event(new Alert('test'));
-});
-
-
 Route::match(['get', 'post'], '/verbs', function () {
     //
 });
@@ -38,7 +32,3 @@ Route::name('admin.')->group(function () {
         // Route assigned name "admin.users"...
     })->name('users');
 });
-
-Route::get('/home', function() {
-    return view('home');
-})->name('home')->middleware('auth');

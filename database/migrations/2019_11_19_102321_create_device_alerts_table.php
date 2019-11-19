@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDevicesTable extends Migration
+class CreateDeviceAlertsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateDevicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('devices', function (Blueprint $table) {
+        Schema::create('device_alerts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('status');
             $table->string('location');
-            $table->bigInteger('user_id')->unsigned();
-            $table->decimal('battery', 10, 2);
+            $table->string('sound');
+            $table->bigInteger('device_id')->unsigned();
+            $table->decimal('lat', 10, 7);
+            $table->decimal('lng', 10, 7);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('device_id')->references('id')->on('devices');
         });
     }
 
@@ -33,6 +33,6 @@ class CreateDevicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('devices');
+        Schema::dropIfExists('device_alerts');
     }
 }

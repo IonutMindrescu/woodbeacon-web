@@ -42,3 +42,7 @@
     background-position: 113% 50%;
     background-size: 130px;
 }
+
+.card:not(:first-child) {
+    margin-top: 15px;
+}

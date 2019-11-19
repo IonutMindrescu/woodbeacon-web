@@ -40,7 +40,7 @@
 <script src="{{ asset('vendor/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ asset('vendor/jquery/dist/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ asset('vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEdRnDkHYG4msxSa59bvLk8pkGjkx-7ss" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEdRnDkHYG4msxSa59bvLk8pkGjkx-7ss" defer></script>
 <script src="{{ asset('js/app.js') }}"></script>
 
 @include('adminlte::plugins', ['type' => 'js'])

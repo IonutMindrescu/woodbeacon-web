@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\{Device, DeviceAlert};
 use App\Events\Alert;
 
 class HomeController extends Controller
@@ -24,10 +25,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
-    }
-
-    public function broadcast() {
-        Event::fire(new Alert('testul pulii'));
+        return view('home', ['devices' => Device::all(), 'alerts' => DeviceAlert::take(10)->get()]);
     }
 }

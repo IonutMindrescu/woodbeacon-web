@@ -9,41 +9,43 @@ WB.GoogleMaps = WB.GoogleMaps || {};
 (function() {
     WB.GoogleMaps = {
         init: function () {
-            let mapMarkers = {};
-            //this.gMap = this.googleMaps();
+            this.mapMarker = null;
+            this.gMap = this.googleMaps();
             this.initListeners();
             //WB.GoogleMaps.attachMarker();
         },
 
         initListeners: function() {
             // card alert
-            $('.card-alert').on('click', (e) => {
+            $(document).find('.card-alert').on('click', (e) => {
                 let element = $(e.currentTarget).data('json');
                 WB.GoogleMaps.panToLocation(element.lat, element.lng);
             });
-            //
         },
 
         panToLocation: function(lat, lng) {
-            //this.gMap.panTo(new google.maps.LatLng(lat, lng));
+            this.gMap.panTo(new google.maps.LatLng(lat, lng));
             this.gMap.setZoom(20);
-            WB.GoogleMaps.attachMarker(lat, lng);
             this.gMap.setCenter(new google.maps.LatLng(lat, lng));
+
+            WB.GoogleMaps.attachMarker(lat, lng);
         },
 
         attachMarker: function(lat, lng) {
-
-            if (this.mapMarkers.length !== 0) {
-                this.mapMarkers.setMap(null);
+            if (this.mapMarker !== null) {
+                this.mapMarker.setMap(null);
             }
-
-            this.mapMarkers = new google.maps.Marker({
+            this.mapMarker = new google.maps.Marker({
                     position: new google.maps.LatLng(lat, lng),
-                    map: this.gMap}),
-                infowindow = new google.maps.InfoWindow({
-                    content: 'Activitate neobisnuita detectata in parcela: 128'
-                });
-            infowindow.open(this.gMap, gMarker);
+                    icon: '/images/marker-tree.png',
+                    animation: google.maps.Animation.BOUNCE,
+                    map: this.gMap
+                }),
+            infowindow = new google.maps.InfoWindow({
+                content: `<center><b>Alerta!</b><br/>Activitate neobisnuita detectata in parcela: <b>128 C</b></center>`,
+                pixelOffset: new google.maps.Size(0, -20)
+            });
+            infowindow.open(this.gMap, this.mapMarker);
         },
 
         googleMaps: function() {
@@ -62,6 +64,7 @@ WB.GoogleMaps = WB.GoogleMaps || {};
                     url: 'http://www.google.com/maps/d/u/0/kml?forcekml=1&mid=1Rxn5g-mTdlG3m--s7DeSAzUm2wrT4tWm&lid=bunKi_v7Wtc',
                     suppressInfoWindows: true,
                     preserveViewport: true,
+                    screenOverlays: true,
                     clickable: true,
                     map: gMap
                 });

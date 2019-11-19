@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\{Alert, DeviceAlert};
+use App\Events\{Alert};
+use App\DeviceAlert;
 use Illuminate\Http\Request;
 
 class DeviceController extends Controller
@@ -22,9 +23,11 @@ class DeviceController extends Controller
             // check the sent action
             switch ($oPayloadFields->action) {
                 case 'sound-detected':
+                    //$this->storeAlert($oPayloadFields);
                     break;
 
                 case 'device-alert':
+                    //alert
                     break;
 
                 default:
@@ -32,5 +35,15 @@ class DeviceController extends Controller
             }
             dd($requestData);
         }
+    }
+
+    private function storeAlert($data) {
+        $alert = new DeviceAlert();
+        $alert->location = "125 C";
+        $alert->sound = "drujba";
+        $alert->device_id = 1;
+        $alert->lat = $data->lat;
+        $alert->lng = $data->lng;
+        $alert->save();
     }
 }
