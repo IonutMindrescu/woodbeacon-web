@@ -2,6 +2,14 @@
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;*/
 
+/* Reset Swal size - Bootstrap problem*/
+
+.swal2-popup {
+  font-size: 1.3rem !important;
+}
+
+/* Device Status */
+
 .status {
   background: black;
   border-radius: 50%;
@@ -109,17 +117,7 @@ $line-height-base: 1.6;*/
   }
 }
 
-/* CSS for Google Maps*/
-
-#js-google-maps {
-  border-radius: 4px;
-  height: calc(100vh - 121px);
-}
-
-.device-image {
-  border: none !important;
-  border-radius: 0;
-}
+/* Alert Cards */
 
 .card {
   border-radius: 4px;
@@ -128,6 +126,10 @@ $line-height-base: 1.6;*/
   transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12), 0.3s box-shadow, 0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
   padding: 14px 80px 18px 36px;
   cursor: pointer;
+}
+
+.card.highlight {
+  background-color: #47d894fa;
 }
 
 .card h3 {
@@ -150,17 +152,43 @@ $line-height-base: 1.6;*/
 .card:hover {
   -webkit-transform: scale(1.05);
           transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
 }
 
 .card-alert {
   background-image: url("/images/alert.png");
   background-repeat: no-repeat;
-  background-position: 113% 50%;
+  background-position: 99% 50%;
   background-size: 130px;
 }
 
 .card:not(:first-child) {
   margin-top: 15px;
+}
+
+/* Alerts */
+
+.js-alerts {
+  max-height: calc(100vh - 425px);
+  overflow-y: scroll;
+  padding: 0 25px;
+  margin: 0 -20px;
+}
+
+.js-alerts::-webkit-scrollbar {
+  display: none;
+}
+
+/* Google Maps*/
+
+#js-google-maps {
+  border-radius: 4px;
+  height: calc(100vh - 121px);
+}
+
+/* Device */
+
+.device-image {
+  border: none !important;
+  border-radius: 0;
 }
 

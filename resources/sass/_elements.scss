@@ -1,3 +1,9 @@
+/* Reset Swal size - Bootstrap problem*/
+.swal2-popup {
+    font-size: 1.3rem !important;
+}
+
+/* Device Status */
 .status {
     background: black;
     border-radius: 50%;
@@ -52,5 +58,60 @@
     100% {
         transform: scale(0.95);
         box-shadow: 0 0 0 0 rgba(51, 217, 178, 0);
+    }
+}
+
+/* Alert Cards */
+.card {
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+    padding: 14px 80px 18px 36px;
+    cursor: pointer;
+
+    &.highlight {
+        background-color: #47d894fa;
+    }
+
+    h3 {
+        font-weight: 600;
+    }
+    img {
+        position: absolute;
+        top: 20px;
+        right: 15px;
+        max-height: 120px;
+    }
+    @media(max-width: 990px) {
+        margin: 20px;
+    }
+}
+
+.card:hover {
+    transform: scale(1.05);
+    //box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+.card-alert {
+    background-image: url('/images/alert.png');
+    background-repeat: no-repeat;
+    background-position: 99% 50%;
+    background-size: 130px;
+}
+
+.card:not(:first-child) {
+    margin-top: 15px;
+}
+
+/* Alerts */
+.js-alerts {
+    max-height: calc(100vh - 425px);
+    overflow-y: scroll;
+    padding: 0 25px;
+    margin: 0 -20px;
+
+    &::-webkit-scrollbar {
+        display: none;
     }
 }

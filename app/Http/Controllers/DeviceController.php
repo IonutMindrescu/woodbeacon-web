@@ -23,7 +23,7 @@ class DeviceController extends Controller
             // check the sent action
             switch ($oPayloadFields->action) {
                 case 'sound-detected':
-                    //$this->storeAlert($oPayloadFields);
+                    $this->storeAlert($oPayloadFields);
                     break;
 
                 case 'device-alert':

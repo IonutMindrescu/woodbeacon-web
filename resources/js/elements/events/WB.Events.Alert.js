@@ -6,6 +6,7 @@
 (function() {
     const jsPackLoader = {
         init: function () {
+            this.moment = require('moment');
             this.soundDetected();
         },
 
@@ -42,7 +43,7 @@
                         });
 
                         this.appendAlert(aData);
-                        WB.GoogleMaps.panToLocation(aData.lat, aData.lng);
+                        WB.GoogleMaps.panToLocation(aData.lat, aData.lng, aData.location);
                         WB.Utils.playAlert('/sounds/alert.wav');
                         break;
                     case 'device-update':
@@ -55,12 +56,18 @@
         },
 
         appendAlert: function (data) {
-            let alertMarkup = `<div class="card card-alert" data-json='{"lat":"${data.lat}","lng":"${data.lng}"}'>
-                <h3>#Alert - ${new Date($.now())}</h3>
+            // alert markup
+            let alertMarkup = `<div class="card card-alert highlight" data-json='{"lat":"${data.lat}","lng":"${data.lng}","location":"${data.location}"}'>
+                <h3>#Alert - ${this.moment().format('YYYY-M-D hh:mm:ss')}</h3>
                 Location: <strong>${data.location}</strong><br/>
                 Sound: <strong>${data.sound}</strong>
             </div>`;
+
+            // attach the new alert to the list
             $('.js-alerts').prepend(alertMarkup);
+
+            // refresh the listener
+            WB.GoogleMaps.initListeners();
         }
     };
 
