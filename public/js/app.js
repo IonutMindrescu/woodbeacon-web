@@ -29324,22 +29324,32 @@ WB.GoogleMaps = WB.GoogleMaps || {};
   WB.GoogleMaps = {
     init: function init() {
       this.mapMarker = null;
+      this.deviceMarker = null;
       this.gMap = this.googleMaps();
       this.gmapLayer = null;
       this.infowindow = null;
-      this.initListeners(); //WB.GoogleMaps.attachMarker();
+      this.initListeners();
+      WB.Utils.createDataTables();
+      WB.GoogleMaps.attachDeviceMarker(47.64016888079212, 26.25917762769484); //WB.GoogleMaps.attachMarker();
     },
     initListeners: function initListeners() {
       $(document).find('.card-alert').off('click').on('click', function (e) {
         var element = $(e.currentTarget).data('json');
         WB.GoogleMaps.panToLocation(element.lat, element.lng, element.location);
       });
+      $(document).find('.js-device-location').off('click').on('click', function (e) {
+        WB.GoogleMaps.panToLocation(47.64016888079212, 26.25917762769484, '', false);
+      });
     },
     panToLocation: function panToLocation(lat, lng, location) {
+      var marker = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
       this.gMap.panTo(new google.maps.LatLng(lat, lng));
       this.gMap.setZoom(20);
       this.gMap.setCenter(new google.maps.LatLng(lat, lng));
-      WB.GoogleMaps.attachMarker(lat, lng, location);
+
+      if (marker === true) {
+        WB.GoogleMaps.attachMarker(lat, lng, location);
+      }
     },
     attachMarker: function attachMarker(lat, lng, location) {
       if (this.mapMarker !== null) {
@@ -29353,10 +29363,17 @@ WB.GoogleMaps = WB.GoogleMaps || {};
         map: this.gMap
       });
       this.infowindow = new google.maps.InfoWindow({
-        content: "<center><b>Alerta!</b><br/>Activitate neobisnuita detectata in parcela: <b>".concat(location, "</b></center>"),
+        content: "\n                    <center>\n                        <b>Alerta!</b><br/>Activitate neobisnuita detectata in parcela: <b>".concat(location, "</b></br>\n                        <b>Coordonate:</b> ").concat(lat, ", ").concat(lng, "</b></br>\n                        <b>Device:</b> Wood Beacon</br>\n                        <b>Sunet:</b> drujba\n                    </center>\n                "),
         pixelOffset: new google.maps.Size(0, -20)
       });
       this.infowindow.open(this.gMap, this.mapMarker);
+    },
+    attachDeviceMarker: function attachDeviceMarker(lat, lng) {
+      this.deviceMarker = new google.maps.Marker({
+        position: new google.maps.LatLng(lat, lng),
+        icon: '/images/wbmapdevice.png',
+        map: this.gMap
+      });
     },
     googleMaps: function googleMaps() {
       var $map = $('#js-google-maps');
@@ -29423,6 +29440,21 @@ WB.Utils = {
   stopAlert: function stopAlert() {
     audioPlay.currentTime = 0;
     audioPlay.pause();
+  },
+
+  /**
+   * Attach datatable for alerts
+   * */
+  createDataTables: function createDataTables() {
+    $('#alerts-table').DataTable({
+      "paging": true,
+      "lengthChange": true,
+      "pageLength": 17,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
   }
 };
 
@@ -29473,7 +29505,7 @@ var WB = WB || {};
           case 'sound-detected':
             Swal.fire({
               title: 'Alerta!',
-              html: "A fost detectata o activitate neobisnuita!<br/>".concat(aData.action),
+              html: 'A fost detectata o activitate neobisnuita!<br/>',
               type: 'warning',
               allowOutsideClick: false,
               showCancelButton: false,
@@ -29505,6 +29537,7 @@ var WB = WB || {};
     },
     appendAlert: function appendAlert(data) {
       // alert markup
+      data.location = '125 C';
       var alertMarkup = "<div class=\"card card-alert highlight\" data-json='{\"lat\":\"".concat(data.lat, "\",\"lng\":\"").concat(data.lng, "\",\"location\":\"").concat(data.location, "\"}'>\n                <h3>#Alert - ").concat(this.moment().format('YYYY-M-D hh:mm:ss'), "</h3>\n                Location: <strong>").concat(data.location, "</strong><br/>\n                Sound: <strong>").concat(data.sound, "</strong>\n            </div>"); // attach the new alert to the list
 
       $('.js-alerts').prepend(alertMarkup); // refresh the listener

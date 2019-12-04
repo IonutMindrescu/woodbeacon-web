@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\{Device, DeviceAlert};
-use App\Events\Alert;
 
 class HomeController extends Controller
 {
@@ -25,6 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home', ['devices' => Device::all(), 'alerts' => DeviceAlert::take(10)->get()]);
+        return view('home', ['devices' => Device::all(), 'alerts' => DeviceAlert::orderBy('id', 'desc')->take(10)->get()]);
+    }
+
+    public function alerts()
+    {
+        return view('admin.alerts', ['alerts' => DeviceAlert::orderBy('id', 'desc')->get()]);
     }
 }

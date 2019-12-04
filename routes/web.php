@@ -27,8 +27,6 @@ Route::match(['get', 'post'], '/verbs', function () {
     //
 });
 
-Route::name('admin.')->group(function () {
-    Route::get('users', function () {
-        // Route assigned name "admin.users"...
-    })->name('users');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('alerts', 'HomeController@alerts')->name('alerts');
 });

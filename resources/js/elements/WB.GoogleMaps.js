@@ -10,10 +10,14 @@ WB.GoogleMaps = WB.GoogleMaps || {};
     WB.GoogleMaps = {
         init: function () {
             this.mapMarker = null;
+            this.deviceMarker = null;
             this.gMap = this.googleMaps();
             this.gmapLayer = null;
             this.infowindow = null;
             this.initListeners();
+            WB.Utils.createDataTables();
+
+            WB.GoogleMaps.attachDeviceMarker(47.64016888079212, 26.25917762769484);
             //WB.GoogleMaps.attachMarker();
         },
 
@@ -22,14 +26,20 @@ WB.GoogleMaps = WB.GoogleMaps || {};
                 let element = $(e.currentTarget).data('json');
                 WB.GoogleMaps.panToLocation(element.lat, element.lng, element.location);
             });
+
+            $(document).find('.js-device-location').off('click').on('click', (e) => {
+                WB.GoogleMaps.panToLocation(47.64016888079212, 26.25917762769484, '', false);
+            });
         },
 
-        panToLocation: function(lat, lng, location) {
+        panToLocation: function(lat, lng, location, marker = true) {
             this.gMap.panTo(new google.maps.LatLng(lat, lng));
             this.gMap.setZoom(20);
             this.gMap.setCenter(new google.maps.LatLng(lat, lng));
 
-            WB.GoogleMaps.attachMarker(lat, lng, location);
+            if (marker === true) {
+                WB.GoogleMaps.attachMarker(lat, lng, location);
+            }
         },
 
         attachMarker: function(lat, lng, location) {
@@ -43,10 +53,25 @@ WB.GoogleMaps = WB.GoogleMaps || {};
                 map: this.gMap
             });
             this.infowindow = new google.maps.InfoWindow({
-                content: `<center><b>Alerta!</b><br/>Activitate neobisnuita detectata in parcela: <b>${location}</b></center>`,
+                content: `
+                    <center>
+                        <b>Alerta!</b><br/>Activitate neobisnuita detectata in parcela: <b>${location}</b></br>
+                        <b>Coordonate:</b> ${lat}, ${lng}</b></br>
+                        <b>Device:</b> Wood Beacon</br>
+                        <b>Sunet:</b> drujba
+                    </center>
+                `,
                 pixelOffset: new google.maps.Size(0, -20)
             });
             this.infowindow.open(this.gMap, this.mapMarker);
+        },
+
+        attachDeviceMarker: function(lat, lng) {
+            this.deviceMarker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat, lng),
+                icon: '/images/wbmapdevice.png',
+                map: this.gMap
+            });
         },
 
         googleMaps: function() {

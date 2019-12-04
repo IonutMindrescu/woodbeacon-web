@@ -24,5 +24,20 @@ WB.Utils = {
     stopAlert: function () {
         audioPlay.currentTime = 0;
         audioPlay.pause();
+    },
+
+    /**
+     * Attach datatable for alerts
+     * */
+    createDataTables: function () {
+        $('#alerts-table').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "pageLength": 17,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+        });
     }
 };

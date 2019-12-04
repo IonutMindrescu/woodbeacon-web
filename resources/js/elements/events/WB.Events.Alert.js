@@ -27,7 +27,7 @@
                     case 'sound-detected':
                         Swal.fire({
                             title: 'Alerta!',
-                            html: `A fost detectata o activitate neobisnuita!<br/>${aData.action}`,
+                            html: 'A fost detectata o activitate neobisnuita!<br/>',
                             type: 'warning',
                             allowOutsideClick: false,
                             showCancelButton: false,
@@ -57,6 +57,8 @@
 
         appendAlert: function (data) {
             // alert markup
+            data.location = '125 C';
+
             let alertMarkup = `<div class="card card-alert highlight" data-json='{"lat":"${data.lat}","lng":"${data.lng}","location":"${data.location}"}'>
                 <h3>#Alert - ${this.moment().format('YYYY-M-D hh:mm:ss')}</h3>
                 Location: <strong>${data.location}</strong><br/>

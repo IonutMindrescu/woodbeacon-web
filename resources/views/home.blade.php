@@ -48,7 +48,7 @@
                                 <div class="col-sm-4">
                                     <div class="description-block">
                                         <h5 class="description-header">LOCATION</h5>
-                                        <span class="description-text"><i class="fa fa-location-arrow"></i></span>
+                                        <span class="description-text js-device-location"><i class="fa fa-location-arrow"></i></span>
                                     </div>
                                     <!-- /.description-block -->
                                 </div>

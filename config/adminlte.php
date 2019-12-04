@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 2',
+    'title' => 'Wood Beacon',
 
     'title_prefix' => '',
 
